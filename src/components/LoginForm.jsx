@@ -10,8 +10,7 @@ const LoginForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Demo login (any username + password works)
-        login(username);
+        login(username, password);
         navigate('/dashboard');
     };
 
