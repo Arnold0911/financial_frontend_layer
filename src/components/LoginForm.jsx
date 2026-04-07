@@ -8,10 +8,14 @@ const LoginForm = () => {
     const { login } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        login(username, password);
-        navigate('/dashboard');
+
+        const success = await login(username, password);
+
+        if (success) {
+            navigate('/dashboard', { replace: true });   // Navigate immediately after successful login
+        }
     };
 
     return (
