@@ -1,9 +1,9 @@
-// src/App.jsx
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider, AuthContext } from './context/AuthContext';
+import { AuthProvider } from './context/AuthContext';
 import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
     return (
@@ -14,14 +14,12 @@ function App() {
                     <Route
                         path="/dashboard"
                         element={
-                            <AuthContext.Consumer>
-                                {({ isLoggedIn }) =>
-                                    isLoggedIn ? <DashboardPage /> : <Navigate to="/login" />
-                                }
-                            </AuthContext.Consumer>
+                            <ProtectedRoute>
+                                <DashboardPage />
+                            </ProtectedRoute>
                         }
                     />
-                    <Route path="/" element={<Navigate to="/login" />} />
+                    <Route path="/" element={<Navigate to="/login" replace />} />
                 </Routes>
             </Router>
         </AuthProvider>
